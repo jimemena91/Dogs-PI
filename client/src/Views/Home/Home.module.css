@@ -1,0 +1,78 @@
+/* Estilos para el área de filtros, ordenamiento y paginado */
+.filtersContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: linear-gradient(to right, #283593, #1a237e);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor del fondo transparente */
+.filtersBackground {
+  
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://t4.ftcdn.net/jpg/00/50/88/69/360_F_50886917_yChVR43wDepJIlbPU6xYEE92rPchmena.jpg');
+    background-size: cover; /* Centra y cubre el área */
+    background-repeat: no-repeat;
+    opacity: 0.5; /* Ajusta la opacidad según tus preferencias */
+    border-radius: 8px;
+  }
+
+.filtersSection,
+.paginationSection {
+  position: relative; /* Asegura que los elementos hijos se posicionen correctamente con respecto a este contenedor */
+  z-index: 1; /* Eleva este contenedor por encima del fondo transparente */
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.filtersSection h4,
+.paginationSection h4 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.filtersSection span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.select {
+  padding: 12px;
+  margin-right: 10px;
+  background-color: #3949ab;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.select:hover {
+  background-color: #303f9f;
+}
+
+/* Estilos para la sección de paginado */
+.paginationButton {
+  padding: 12px 24px;
+  background-color: #3949ab;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.paginationButton:hover {
+  background-color: #303f9f;
+}

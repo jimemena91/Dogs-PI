@@ -1,0 +1,35 @@
+.NavBarCont {
+  background-image: url('https://www.everythingdoormats.com/images/products/all-you-need-is-dog-doormat-funny-m909');
+  background-size: cover; /* Cubre completamente el contenedor */
+  background-position: center 35%; /* Ajusta la posición de la imagen hacia abajo */
+  background-repeat: no-repeat;
+  color: white; /* Cambiado a color blanco para mejorar la legibilidad */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  height: 220px; /* Reducida la altura para una mejor visualización */
+}
+
+.NavBarLinkCont {
+  display: flex;
+  gap: 20px;
+}
+
+.NavBarLink {
+  text-decoration: none;
+  color: #c7c7c7; /* Color de enlaces menos intenso */
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s; /* Agregada transición al cambiar el color al pasar el ratón */
+}
+
+.NavBarLink:hover {
+  color: #fff; /* Cambio de color al pasar el ratón */
+}
+
+.NavBarImgCont img {
+  max-width: 200px; /* Aumentado el tamaño del logo */
+  height: auto;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Agregando sombreado a la imagen */
+}

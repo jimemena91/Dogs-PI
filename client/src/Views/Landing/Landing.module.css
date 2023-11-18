@@ -1,0 +1,41 @@
+.landingCont {
+  background-image: url("https://wallpaperset.com/w/full/3/2/5/6742.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.landingCont h1 {
+  font-size: 4em;
+  margin-bottom: 20px;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+  color: white; /* Título blanco para contrastar con el fondo oscuro */
+}
+
+.landingCont a img {
+  width: 150px;
+  height: 150px;
+}
+
+.landingCont a {
+  display: inline-block;
+  padding: 20px;
+  background-color: #3a75c4; /* Azul claro para el fondo del enlace */
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 1.5em;
+  margin-top: 400px;
+  transition: background-color 0.3s ease;
+}
+
+.landingCont a:hover {
+  background-color: #2b5797; /* Tonos más oscuros al pasar el mouse para un efecto visual */
+}

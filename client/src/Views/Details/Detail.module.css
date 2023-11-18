@@ -1,0 +1,69 @@
+/* Detail.module.css */
+
+.detailContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #2c3e50;
+  border-radius: 20px;
+  overflow: hidden;
+  color: #ecf0f1;
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: 3em;
+  margin-bottom: 15px;
+  color: #e74c3c;
+}
+
+.dogImageContainer {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.dogImage {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.detailsSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  text-align: center;
+}
+
+.detailsLabel {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 8px;
+  color: #e74c3c;
+}
+
+.detailsValue {
+  color: #f39c12;
+}
+
+.temperamentList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan si no hay suficiente espacio */
+  justify-content: center;
+}
+
+.temperamentItem {
+  margin: 0 8px 8px 0; /* Añadido espacio inferior para separar los elementos */
+  background-color: #3498db;
+  padding: 8px 15px;
+  border-radius: 10px;
+  color: #ecf0f1;
+  font-weight: bold;
+}
