@@ -6,8 +6,6 @@ import {
   getTemperaments,
   orderDogsAction,
   paginateDogs,
- 
-  orderByWeight,
   filterOriginAction,
 } from "../../Redux/Actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,11 +29,10 @@ const Home = () => {
   const paginate = (event) => {
     dispatch(paginateDogs(event.target.name, selectedTemperaments));
   };
-  
 
   const filterDogs = (event) => {
     if (event.target.name === "temperaments") {
-      const selectedTemperament = event.target.value; 
+      const selectedTemperament = event.target.value;
       const updatedTemperaments = [
         ...selectedTemperaments,
         selectedTemperament,
@@ -48,16 +45,13 @@ const Home = () => {
     const updatedTemperaments = selectedTemperaments.filter(
       (temp) => temp !== temperamentToRemove
     );
-  
+
     // Actualiza el estado local
     setSelectedTemperaments(updatedTemperaments);
-  
+
     // Actualiza el estado global
     dispatch(filterDogsAction(updatedTemperaments));
   };
-  
-
-
 
   const filterByOrigin = (event) => {
     const selectedOrigin = event.target.value;
@@ -67,12 +61,9 @@ const Home = () => {
   const orderDogs = (event) => {
     const orderType = event.target.value;
     const orderCategory = event.target.name;
-  
-    if (orderCategory === "orderByName") {
-      dispatch(orderDogsAction(orderType));
-    } else if (orderCategory === "orderByWeight") {
-      dispatch(orderByWeight(orderType));
-      console.log('Estado actual después de la ordenación:', allDogs);
+
+    if (orderCategory === "orderByName" || orderCategory === "orderByWeight") {
+      dispatch(orderDogsAction(orderType, orderCategory));
     }
   };
 
@@ -89,7 +80,7 @@ const Home = () => {
         <div className={style.filtersSection}>
           <h4>Filtros/Ordenamientos:</h4>
           <span>Ordenamiento por nombre: </span>
-          <select onClick={orderDogs}>
+          <select onClick={orderDogs} name="orderByName">
             <option value="AZ">A-Z</option>
             <option value="ZA">Z-A</option>
           </select>
@@ -120,25 +111,31 @@ const Home = () => {
           </select>
         </div>
         <div className={style.paginationSection}>
-        <h4>Paginado: </h4>
-        <span>Página actual: {currentPage + 1}</span>
-        <span>Total de páginas: {totalPages}</span>
-        <button
-          className={style.paginationButton}
-          name="prev"
-          onClick={paginate}
-        >
-          Prev
-        </button>
-        <button
-          className={style.paginationButton}
-          name="next"
-          onClick={paginate}
-        >
-          Next
-        </button>
-        <button onClick={event=> {handleClick(event)}}>RESET DOGS</button>
-      </div>
+          <h4>Paginado: </h4>
+          <span>Página actual: {currentPage + 1}</span>
+          <span>Total de páginas: {totalPages}</span>
+          <button
+            className={style.paginationButton}
+            name="prev"
+            onClick={paginate}
+          >
+            Prev
+          </button>
+          <button
+            className={style.paginationButton}
+            name="next"
+            onClick={paginate}
+          >
+            Next
+          </button>
+          <button
+            onClick={(event) => {
+              handleClick(event);
+            }}
+          >
+            RESET DOGS
+          </button>
+        </div>
       </div>
       <CardsContainer allDogs={allDogs} />
     </div>

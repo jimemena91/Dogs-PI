@@ -95,26 +95,20 @@ export function filterDogsAction(temperaments) {
       }
     };
   }
-export function orderDogsAction(orderAux) {
+
+export const orderDogsAction = (orderType, orderCategory) => {
   return async function (dispatch) {
     try {
-      dispatch({ type: ORDER, payload: orderAux });
+      if (orderCategory === "orderByName") {
+        dispatch({ type: ORDER, payload: orderType });
+      } else if (orderCategory === "orderByWeight") {
+        dispatch({ type: ORDER_BY_WEIGHT, payload: orderType });
+      }
     } catch (error) {
       alert("Hubo un error ordenando los perros.");
     }
   };
-}
-export function orderByWeight(orderWeight) {
-  return async function (dispatch) {
-    try {
-      console.log('Action: ORDER_BY_WEIGHT - Orden:', orderWeight);
-      dispatch({ type: ORDER_BY_WEIGHT, payload: orderWeight });
-    } catch (error) {
-      console.error("Hubo un error ordenando los perros por su peso.", error);
-      alert("Hubo un error ordenando los perros por su peso.");
-    }
-  };
-}
+};
 
 export function getDog(id) {
   return async function (dispatch) {
