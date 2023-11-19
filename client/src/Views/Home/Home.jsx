@@ -29,12 +29,13 @@ const Home = () => {
   }, []);
 
   const paginate = (event) => {
-    dispatch(paginateDogs(event.target.name));
+    dispatch(paginateDogs(event.target.name, selectedTemperaments));
   };
+  
 
   const filterDogs = (event) => {
     if (event.target.name === "temperaments") {
-      const selectedTemperament = event.target.value;
+      const selectedTemperament = event.target.value; 
       const updatedTemperaments = [
         ...selectedTemperaments,
         selectedTemperament,
@@ -47,9 +48,14 @@ const Home = () => {
     const updatedTemperaments = selectedTemperaments.filter(
       (temp) => temp !== temperamentToRemove
     );
+  
+    // Actualiza el estado local
     setSelectedTemperaments(updatedTemperaments);
+  
+    // Actualiza el estado global
     dispatch(filterDogsAction(updatedTemperaments));
   };
+  
 
 
 
@@ -60,12 +66,13 @@ const Home = () => {
 
   const orderDogs = (event) => {
     const orderType = event.target.value;
-    const orderCategory = event.target.name; // Puedes agregar un atributo "name" a los elementos select para identificar la categoría de orden
-
+    const orderCategory = event.target.name;
+  
     if (orderCategory === "orderByName") {
       dispatch(orderDogsAction(orderType));
     } else if (orderCategory === "orderByWeight") {
       dispatch(orderByWeight(orderType));
+      console.log('Estado actual después de la ordenación:', allDogs);
     }
   };
 

@@ -1,56 +1,37 @@
-/* Estilos para el área de filtros, ordenamiento y paginado */
+/* styles.module.css */
+
 .filtersContainer {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
-  padding: 20px;
+  margin-bottom: 10px; /* Ajustar el margen inferior según tus necesidades */
+  padding: 10px;
   background: linear-gradient(to right, #283593, #1a237e);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenedor del fondo transparente */
-.filtersBackground {
-  
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://t4.ftcdn.net/jpg/00/50/88/69/360_F_50886917_yChVR43wDepJIlbPU6xYEE92rPchmena.jpg');
-    background-size: cover; /* Centra y cubre el área */
-    background-repeat: no-repeat;
-    opacity: 0.5; /* Ajusta la opacidad según tus preferencias */
-    border-radius: 8px;
-  }
-
 .filtersSection,
 .paginationSection {
-  position: relative; /* Asegura que los elementos hijos se posicionen correctamente con respecto a este contenedor */
-  z-index: 1; /* Eleva este contenedor por encima del fondo transparente */
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 600px;
-  margin-bottom: 20px;
+  max-width: 300px; /* Ajustar el tamaño máximo del contenedor según tus necesidades */
+  margin-bottom: 10px; /* Ajustar el margen inferior según tus necesidades */
   color: white;
 }
 
 .filtersSection h4,
 .paginationSection h4 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 16px; /* Ajustar el tamaño de la fuente según tus necesidades */
+  margin-bottom: 8px; /* Ajustar el margen inferior según tus necesidades */
   text-align: center;
 }
 
-.filtersSection span {
-  font-weight: bold;
-  margin-right: 10px;
-}
-
 .select {
-  padding: 12px;
-  margin-right: 10px;
+  padding: 6px; /* Ajustar el tamaño del padding para hacer los elementos más pequeños */
+  margin-right: 5px; /* Ajustar el margen derecho según tus necesidades */
   background-color: #3949ab;
   color: white;
   border: none;
@@ -62,9 +43,8 @@
   background-color: #303f9f;
 }
 
-/* Estilos para la sección de paginado */
 .paginationButton {
-  padding: 12px 24px;
+  padding: 6px 12px; /* Ajustar el tamaño del padding para hacer los botones más pequeños */
   background-color: #3949ab;
   color: white;
   border: none;

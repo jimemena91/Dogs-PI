@@ -16,7 +16,7 @@ const CardsContainer = ({ allDogs }) => {
           weight_min={dog.weight_min}
           weight_max={dog.weight_max}
           temperaments={dog.temperaments}
-          createdInDb={dog.createInDb}
+          createInDb={dog.createInDb}
         />
       ))}
     </div>

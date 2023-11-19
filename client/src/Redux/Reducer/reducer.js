@@ -66,76 +66,58 @@ function rootReducer(state = initialState, action) {
         ...state,
         allDogs: action.payload,
       };
-
-    case PAGINATE:
-      const totalPages = Math.ceil(
-        state.filter
-          ? state.dogsFiltered.length / ITEMS_PER_PAGE
-          : state.allDogsBackUp.length / ITEMS_PER_PAGE
-      );
-
-      const next_page = state.currentPage + 1;
-      const prev_page = state.currentPage - 1;
-      const firstIndex =
-        action.payload === "next"
-          ? next_page * ITEMS_PER_PAGE
-          : prev_page * ITEMS_PER_PAGE;
-
-      if (state.filter) {
-        if (
-          action.payload === "next" &&
-          firstIndex >= state.dogsFiltered.length
-        )
-          return state;
-        else if (action.payload === "prev" && prev_page < 0) return state;
+      case PAGINATE:
+        const totalDogs = state.filter
+          ? state.dogsFiltered.length
+          : state.allDogsBackUp.length;
+        const updatedTotalPagesPaginate = Math.ceil(totalDogs / ITEMS_PER_PAGE);
+      
+        const newCurrentPage =
+          action.payload === "next"
+            ? Math.min(state.currentPage + 1, updatedTotalPagesPaginate - 1)
+            : Math.max(state.currentPage - 1, 0);
+      
+        const firstIndexPaginate = newCurrentPage * ITEMS_PER_PAGE;
+      
         return {
           ...state,
-          allDogs: [...state.dogsFiltered].splice(firstIndex, ITEMS_PER_PAGE),
-          currentPage: action.payload === "next" ? next_page : prev_page,
-          totalPages,
+          allDogs: state.filter
+            ? state.dogsFiltered.slice(firstIndexPaginate, firstIndexPaginate + ITEMS_PER_PAGE)
+            : state.allDogsBackUp.slice(firstIndexPaginate, firstIndexPaginate + ITEMS_PER_PAGE),
+          currentPage: newCurrentPage,
+          totalPages: updatedTotalPagesPaginate,
         };
-      }
 
-      if (action.payload === "next" && firstIndex >= state.allDogsBackUp.length)
-        return state;
-      else if (action.payload === "prev" && prev_page < 0) return state;
-
-      return {
-        ...state,
-        allDogs: [...state.allDogsBackUp].splice(firstIndex, ITEMS_PER_PAGE),
-        currentPage: action.payload === "next" ? next_page : prev_page,
-        totalPages,
-      };
-
-      case FILTER:
-        let filteredDogs = [];
       
-        if (Array.isArray(action.payload) && action.payload.length > 0) {
-          // Si hay temperamentos seleccionados, aplicar el filtro sobre los resultados anteriores
-          const previousFilteredDogs = state.filter ? state.dogsFiltered : state.allDogsBackUp;
-      
-          // Filtrar por múltiples temperamentos sobre los resultados anteriores
-          filteredDogs = previousFilteredDogs.filter((dog) => {
-            const formattedTemperaments = dog.temperaments.map((temp) =>
-              temp.toLowerCase().trim()
-            );
-            // Verificar si todos los temperamentos seleccionados están presentes en el perro
-            return action.payload.every((selectedTemp) =>
-              formattedTemperaments.includes(selectedTemp.toLowerCase().trim())
-            );
-          });
-        } else {
-          // Sin temperamentos seleccionados, mostrar todos los resultados
-          filteredDogs = state.allDogsBackUp;
-        }
-      
-        return {
-          ...state,
-          allDogs: filteredDogs.slice(0, ITEMS_PER_PAGE),
-          dogsFiltered: filteredDogs,
-          filter: true,
-          currentPage: 0,
-      };
+  case FILTER:
+    let filteredDogs = [];
+  
+    if (Array.isArray(action.payload) && action.payload.length > 0) {
+      filteredDogs = state.allDogsBackUp.filter((dog) => {
+        const formattedTemperaments = dog.temperaments.map((temp) =>
+          temp.toLowerCase().trim()
+        );
+  
+        return action.payload.every((selectedTemp) =>
+          formattedTemperaments.includes(selectedTemp.toLowerCase().trim())
+        );
+      });
+    } else {
+      // Sin temperamentos seleccionados, mostrar todos los resultados
+      filteredDogs = state.allDogsBackUp;
+    }
+  
+    const updatedTotalPages = Math.ceil(filteredDogs.length / ITEMS_PER_PAGE);
+  
+    return {
+      ...state,
+      allDogs: filteredDogs.slice(0, ITEMS_PER_PAGE),
+      dogsFiltered: filteredDogs,
+      filter: true,
+      currentPage: 0,
+      totalPages: updatedTotalPages,
+  };
+  
 
     case FILTER_BY_ORIGIN:
       const filteredByOrigin =
@@ -151,74 +133,65 @@ function rootReducer(state = initialState, action) {
         currentPage: 0,
       };
 
-    case ORDER:
-      let orderByName = [];
-      if (action.payload === "AZ") {
-        orderByName = [...state.allDogsBackUp].sort((prev, next) => {
-          if (prev?.name.toLowerCase() > next?.name.toLowerCase()) return 1;
-
-          if (prev?.name.toLowerCase() < next?.name.toLowerCase()) return -1;
-
-          return 0;
+      case ORDER:
+        const orderByName = [...state.allDogsBackUp].sort((prev, next) => {
+          const orderValue = action.payload === "AZ" ? 1 : -1;
+          return orderValue * prev.name.localeCompare(next.name);
         });
-      }
-      if (action.payload === "ZA") {
-        orderByName = [...state.allDogsBackUp].sort((prev, next) => {
-          if (prev?.name.toLowerCase() > next?.name.toLowerCase()) return -1;
-
-          if (prev?.name.toLowerCase() < next?.name.toLowerCase()) return 1;
-
-          return 0;
-        });
-      }
-
-      return {
-        ...state,
-        allDogs: [...orderByName].splice(0, ITEMS_PER_PAGE),
-        allDogsBackUp: orderByName,
-        currentPage: 0,
-      };
-
-    case ORDER_BY_WEIGHT:
-      let orderByWeight = [];
-      if (action.payload === "ASC") {
-        orderByWeight = [...state.allDogsBackUp].sort((prev, next) => {
-          return prev.weight - next.weight;
-        });
-      } else if (action.payload === "DESC") {
-        orderByWeight = [...state.allDogsBackUp].sort((prev, next) => {
-          return next.weight - prev.weight;
-        });
-      }
-      return {
-        ...state,
-        allDogs: [...orderByWeight].splice(0, ITEMS_PER_PAGE),
-        allDogsBackUp: orderByWeight,
-        currentPage: 0,
-      };
-      case REMOVE_TEMPERAMENT:
-        const updatedSelectedTemperaments = state.selectedTemperaments.filter(
-          (temp) => temp !== action.payload.name
-        );
-      
-        let updatedFilteredDogs = state.allDogsBackUp;
-        if (updatedSelectedTemperaments.length > 0) {
-          updatedFilteredDogs = filterDogsByTemperament(
-            state.allDogsBackUp,
-            updatedSelectedTemperaments.join(", ")
-          );
-        }
       
         return {
           ...state,
-          selectedTemperaments: updatedSelectedTemperaments,
-          allDogs: updatedFilteredDogs.slice(0, ITEMS_PER_PAGE),
-          dogsFiltered: updatedFilteredDogs,
-          filter: true,
+          allDogs: [...orderByName].splice(0, ITEMS_PER_PAGE),
+          allDogsBackUp: orderByName,
           currentPage: 0,
-        };
-      
+      };
 
+      case ORDER_BY_WEIGHT:
+  let orderByWeight = [];
+  if (action.payload === "ASC") {
+    orderByWeight = [...state.allDogsBackUp].sort((prev, next) => {
+      return Number(prev.weight) - Number(next.weight);
+    });
+  } else if (action.payload === "DESC") {
+    orderByWeight = [...state.allDogsBackUp].sort((prev, next) => {
+      return Number(next.weight) - Number(prev.weight);
+    });
+  }
+  return {
+    ...state,
+    allDogs: [...orderByWeight].splice(0, ITEMS_PER_PAGE),
+    allDogsBackUp: orderByWeight,
+    currentPage: 0,
+};
+
+      
+case REMOVE_TEMPERAMENT:
+  const updatedSelectedTemperament = action.payload.name;
+
+  // Filtra usando dogsFiltered en lugar de selectedTemperaments
+  const updatedFilteredDogs = state.dogsFiltered.filter(
+    (dog) =>
+      dog.temperaments &&
+      dog.temperaments.includes(updatedSelectedTemperament)
+  );
+
+  const newTotalPages = Math.ceil(updatedFilteredDogs.length / ITEMS_PER_PAGE);
+  const currentPage = Math.min(state.currentPage, newTotalPages - 1);
+
+  return {
+    ...state,
+    allDogs: updatedFilteredDogs.slice(
+      currentPage * ITEMS_PER_PAGE,
+      (currentPage + 1) * ITEMS_PER_PAGE
+    ),
+    dogsFiltered: updatedFilteredDogs,
+    currentPage,
+    totalPages: newTotalPages,
+};
+
+
+
+      
 
     default:
       return state;

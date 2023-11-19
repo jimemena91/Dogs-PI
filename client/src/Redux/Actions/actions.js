@@ -107,12 +107,15 @@ export function orderDogsAction(orderAux) {
 export function orderByWeight(orderWeight) {
   return async function (dispatch) {
     try {
+      console.log('Action: ORDER_BY_WEIGHT - Orden:', orderWeight);
       dispatch({ type: ORDER_BY_WEIGHT, payload: orderWeight });
     } catch (error) {
+      console.error("Hubo un error ordenando los perros por su peso.", error);
       alert("Hubo un error ordenando los perros por su peso.");
     }
   };
 }
+
 export function getDog(id) {
   return async function (dispatch) {
     try {
