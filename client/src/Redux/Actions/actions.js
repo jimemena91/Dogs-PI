@@ -114,10 +114,14 @@ export function getDog(id) {
   return async function (dispatch) {
     try {
       const response = await axios.get(`http://localhost:3001/dogs/${id}`);
+      const isFromApi = !isNaN(Number(response.data.id));
+
+      // Ajusta la propiedad createInDb según la procedencia del perro
       const dogWithCreateInDb = {
         ...response.data,
-        createInDb: true, // o el valor correcto según tu lógica
+        createInDb: !isFromApi,
       };
+
       dispatch({ type: GET_DOG_DETAIL, payload: dogWithCreateInDb });
     } catch (error) {
       console.log(error);
