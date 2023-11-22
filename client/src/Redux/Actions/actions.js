@@ -49,6 +49,9 @@ export function getDogs() {
     try {
       const response = await axios.get("http://localhost:3001/dogs/");
       dispatch({ type: GET_DOGS, payload: response.data });
+      
+      // Disparar la acción de paginación inicial
+      dispatch(paginateDogs("next"));
     } catch (error) {
       if (error.response && error.response.data) {
         alert(error.response.data.error);
@@ -58,10 +61,10 @@ export function getDogs() {
     }
   };
 }
-export function paginateDogs(order) {
+export function paginateDogs(order, category) {
   return async function (dispatch) {
     try {
-      dispatch({ type: PAGINATE, payload: order });
+      dispatch({ type: PAGINATE, payload: { order, category } });
     } catch (error) {
       alert("Hubo un error paginando los perros.");
     }
