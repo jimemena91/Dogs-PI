@@ -1,48 +1,78 @@
-/* Estilos para el contenedor del formulario */
-.formCont {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Estilos para el formulario */
-  .formCont form {
-    display: flex;
-    flex-direction: column;
-    width: 20rem;
-    padding: 10px; /* Añade un poco de relleno */
-    background-color: #f0f0f0; /* Color de fondo para mayor contraste */
-    border: 1px solid #ccc; /* Borde para enfocar visualmente el formulario */
-    border-radius: 8px;
-  }
-  
-  /* Estilos para los mensajes de error */
-  .errorText {
-    color: #ff0000; /* Color rojo para indicar errores */
-    font-size: 0.8em; /* Tamaño de fuente más pequeño para la legibilidad */
-    margin-top: 4px; /* Margen superior para separar el texto del input */
-  }
-  
-  /* Estilos para el botón de enviar */
-  .submitButton {
-    margin-top: 10px; /* Añade un poco de espacio sobre el botón */
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    background-color: #235784; /* Color de botón */
-    color: #fff; /* Texto blanco para contraste */
-    cursor: pointer;
-  }
-  
-  /* Estilos para los temperamentos seleccionados */
-  .selectedTemp {
-    background-color: #235784; /* Color de fondo */
-    color: #fff; /* Texto blanco para contraste */
-    border-radius: 4px;
-    padding: 4px;
-    margin-right: 4px; /* Espacio entre los elementos */
-  }
-  
 
-  
+
+.formCont {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Estilos para el formulario */
+.formCont form {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Estilos para las etiquetas y campos de entrada */
+.formCont form label {
+  margin-bottom: 5px;
+}
+
+.formCont form input,
+.formCont form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+/* Estilos para los mensajes de error */
+.formCont form .errorText {
+  color: #ff0000;
+  font-size: 0.8em;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+/* Estilos para el botón de enviar */
+.formCont form .submitButton {
+  margin-top: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.formCont form .submitButton:hover {
+  background-color: #45a049;
+}
+
+.formCont form .submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilos para los temperamentos seleccionados */
+.formCont form .selectedTemp {
+  background-color: #235784;
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  display: inline-block;
+}
+.formCont form input:focus,
+.formCont form select:focus {
+  border-color: #007bff; /* Cambiar el color del borde al enfocar */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Sombra al enfocar */
+}

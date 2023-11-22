@@ -25,18 +25,7 @@ let initialState = {
   totalPages: 0,
 };
 
-function filterDogsByTemperament(allDogs, temper) {
-  return allDogs.filter((dog) => {
-    if (dog.temperaments && Array.isArray(dog.temperaments)) {
-      const formattedTemperaments = dog.temperaments.map((temp) =>
-        temp.toLowerCase().trim()
-      );
-      const formattedTemper = temper.toLowerCase().trim();
-      return formattedTemperaments.includes(formattedTemper);
-    }
-    return false;
-  });
-}
+
 
 function rootReducer(state = initialState, action) {
   const ITEMS_PER_PAGE = 8;
@@ -54,10 +43,10 @@ function rootReducer(state = initialState, action) {
 
       case GET_DOGS:
         const { payload } = action;
-        console.log("Datos almacenados en el estado global:", payload);
+      
         const updatedDogs = payload.map((dog) => {
           const isFromApi = !isNaN(Number(dog.id));
-          console.log(`Dog ID: ${dog.id}, Is from API: ${isFromApi}`);
+          
           return {
             ...dog,
             createInDb: isFromApi ? false : true,
@@ -159,24 +148,57 @@ function rootReducer(state = initialState, action) {
         currentPage: 0,
       };
 
-    case ORDER_BY_WEIGHT:
-      let orderByWeight = [];
-      if (action.payload === "ASC") {
-        orderByWeight = [...state.allDogsBackUp].sort((prev, next) => {
-          return Number(prev.weight) - Number(next.weight);
-        });
-      } else if (action.payload === "DESC") {
-        orderByWeight = [...state.allDogsBackUp].sort((prev, next) => {
-          return Number(next.weight) - Number(prev.weight);
-        });
-      }
-      return {
-        ...state,
-        allDogs: [...orderByWeight].splice(0, ITEMS_PER_PAGE),
-        allDogsBackUp: orderByWeight,
-        currentPage: 0,
-      };
+      case ORDER_BY_WEIGHT:
+        try {
+          const sortedBreeds = [...state.allDogsBackUp];
+          sortedBreeds.sort((a, b) => {
+            const weightA = parseInt(a.weight_min) || parseInt(a.weight_max) || 0;
+            const weightB = parseInt(b.weight_min) || parseInt(b.weight_max) || 0;
+      
+            console.log(`Peso A: ${weightA}, Peso B: ${weightB}`);
+      
+            if (action.payload === 'asc') {
+              console.log('Ordenando de menor a mayor');
+              return weightA - weightB;
+            } else {
+              console.log('Ordenando de mayor a menor');
+              console.log(`Comparando ${weightB} con ${weightA}`);
+              const result = weightB - weightA;
+              console.log(`Resultado de la comparación: ${result}`);
+              return result;
+            }
+          });
+      
+          console.log('Breeds ordenados:', sortedBreeds);
+      
+          const newCurrentPage =
+            state.currentPage * ITEMS_PER_PAGE < sortedBreeds.length
+              ? state.currentPage
+              : Math.floor(sortedBreeds.length / ITEMS_PER_PAGE) - 1;
+      
+          console.log('Nueva página actual:', newCurrentPage);
+      
+          const startIndex = newCurrentPage * ITEMS_PER_PAGE;
+          const endIndex = startIndex + ITEMS_PER_PAGE;
+      
+          console.log('Índices de corte:', startIndex, endIndex);
+      
+          const slicedBreeds = sortedBreeds.slice(startIndex, endIndex);
+      
+          console.log('Breeds después de cortar:', slicedBreeds);
+      
+          return {
+            ...state,
+            allDogs: slicedBreeds,
+            currentPage: newCurrentPage,
+          };
+        } catch (error) {
+          console.error('Error en ORDER_BY_WEIGHT:', error);
+          return state; // Devolvemos el estado actual en caso de error
+        }
+      
 
+      
     case REMOVE_TEMPERAMENT:
       const updatedSelectedTemperament = action.payload.name;
 

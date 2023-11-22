@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./form.module.css";
 import { getTemperaments, postDog } from "../../Redux/Actions/actions";
+import { validateName, validateImage, validateDecimal, validateInteger, validateTemperaments } from "./validationUtils";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -9,13 +10,10 @@ const Form = () => {
   const allTemperaments = useSelector((state) => state.allTemperaments);
 
   useEffect(() => {
-    console.log("Estado incial:", state)
     dispatch(getTemperaments());
-console.log("Estado despues de obtener temperamentos:", state)
+
     return () => {};
   }, []);
-
-  //const defaultImage = "https://img.freepik.com/fotos-premium/perro-bufanda-colorida-gafas-sol_901003-3478.jpg?size=626&ext=jpg&ga=GA1.1.1518270500.1698278400&semt=ais"
 
   const [state, setState] = useState({
     name: "",
@@ -32,125 +30,51 @@ console.log("Estado despues de obtener temperamentos:", state)
 
   const [errors, setErrors] = useState({
     name: "Name requerido",
-    image: "Image requeria",
+    image: "Image requerido",
     height_min: "height_min requerido",
     height_max: "height_max requerido",
     weight_min: "weight_min requerido",
     weight_max: "weight_max requerido",
     life_span_min: "life_span_min requerido",
-    life_span_max: "life_span_max",
-    temperaments: "",
+    life_span_max: "life_span_max requerido",
+    temperaments: "Debe seleccionar al menos 1 temperamento",
   });
 
-  const validate = (state, name) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
     switch (name) {
       case "name":
-        if (state.name === "") {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            name: "Campo requerido",
-          }));
-        } else if (state.name.length < 5) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            name: "Debe tener al menos 5 caracteres",
-          }));
-        } else if (state.name.length > 10) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            name: "No debe superar los 10 caracteres",
-          }));
-        } else {
-          setErrors((prevErrors) => ({ ...prevErrors, name: "" }));
-        }
+        setErrors((prevErrors) => ({ ...prevErrors, name: validateName(value) }));
         break;
-
       case "image":
-        const imgPattern = /^http(s)?:\/\/.+\..+/;
-        if (state.image === "") {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            image: "Campo requerido",
-          }));
-        } else if (!imgPattern.test(state.image)) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            image: "URL de imagen inválida",
-          }));
-        } else {
-          setErrors((prevErrors) => ({ ...prevErrors, image: "" }));
-        }
+        setErrors((prevErrors) => ({ ...prevErrors, image: validateImage(value) }));
         break;
-
       case "height_min":
       case "height_max":
       case "weight_min":
       case "weight_max":
-        const isDecimal = /^\d*\.?\d+$/; // Expresión regular para números decimales
-
-        if (state[name] === "") {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: "Campo requerido",
-          }));
-        } else if (!isDecimal.test(state[name])) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: "Debe ser un número decimal",
-          }));
-        } else {
-          setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
-        }
+        setErrors((prevErrors) => ({ ...prevErrors, [name]: validateDecimal(value, name) }));
         break;
-
       case "life_span_min":
       case "life_span_max":
-        const isInteger = /^\d+$/; // Expresión regular para números enteros
-
-        if (state[name] === "") {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: "Campo requerido",
-          }));
-        } else if (!isInteger.test(state[name])) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: "Debe ser un número entero",
-          }));
-        } else {
-          setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
-        }
+        setErrors((prevErrors) => ({ ...prevErrors, [name]: validateInteger(value, name) }));
         break;
       case "temperaments":
-        if (state.temperaments.length === 0) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            temperaments: "Selecciona al menos un temperamento",
-          }));
-        } else {
-          setErrors((prevErrors) => ({ ...prevErrors, temperaments: "" }));
-        }
+        setErrors((prevErrors) => ({ ...prevErrors, temperaments: validateTemperaments(value) }));
         break;
       default:
         break;
     }
-  };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-  
     if (name === "temperaments") {
-      const selectedTemperament = allTemperaments.find(temp => temp === value);
-      console.log("Selected Temperament:", selectedTemperament);
-  
+      const selectedTemperament = allTemperaments.find((temp) => temp === value);
+
       if (selectedTemperament && !state.temperaments.includes(selectedTemperament)) {
-        console.log("Temperaments Before Add:", state.temperaments);
-        setState(prevState => ({
+        setState((prevState) => ({
           ...prevState,
           temperaments: [...prevState.temperaments, selectedTemperament],
         }));
-        console.log("Temperaments After Add:", [...state.temperaments, selectedTemperament]);
-        validate({ ...state, temperaments: [...state.temperaments, selectedTemperament] }, "temperaments");
       }
     } else {
       setState({
@@ -158,34 +82,33 @@ console.log("Estado despues de obtener temperamentos:", state)
         [name]: value,
         createInDb: true,
       });
-      validate({ ...state, [name]: value }, name);
     }
   };
-  
-  
-  
 
   const disabledFunction = () => {
-    let disabledAux = true
     for (let error in errors) {
-      if (errors[error] === "") disabledAux = false;
-      else {
-        disabledAux = true;
-        break;
+      if (errors[error] !== "") {
+        return true;
       }
     }
-    return disabledAux;
+  
+    // Ahora, también verifica el estado de los campos para deshabilitar el botón si no son válidos
+    for (let field in state) {
+      if (state[field] === "" || state[field] === 0) {
+        return true;
+      }
+    }
+  
+    return false;
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const newState = { ...state, createInDb: true };
-  
     dispatch(postDog(newState));
   };
 
-
   return (
+    <div className={style.formPage}>
     <div className={style.formCont}>
       <form onSubmit={handleSubmit} className={style.formStyles}>
         <label>Name: </label>
@@ -255,6 +178,7 @@ console.log("Estado despues de obtener temperamentos:", state)
           className={style.submitButton}
         />
       </form>
+    </div>
     </div>
   );
 };

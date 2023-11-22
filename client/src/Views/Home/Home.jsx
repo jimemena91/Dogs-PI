@@ -89,6 +89,9 @@ const Home = () => {
             <option value="ASC">Menor a Mayor</option>
             <option value="DESC">Mayor a Menor</option>
           </select>
+          <span>
+            Temperamentos seleccionados: {selectedTemperaments.join(", ")}
+          </span>
           <select onChange={filterDogs} name="temperaments">
             {allTemperaments.map((temp) => (
               <option key={temp} value={temp}>
@@ -96,14 +99,15 @@ const Home = () => {
               </option>
             ))}
           </select>
-          <span>
-            Temperamentos seleccionados: {selectedTemperaments.join(", ")}
-          </span>
+         
           {selectedTemperaments.map((temp) => (
-            <button key={temp} onClick={() => removeSelectedTemperament(temp)}>
+            <button key={temp} onClick={() => removeSelectedTemperament(temp)} className={style.selectedTemperament}>
               X {temp}
             </button>
           ))}
+           <span>
+           Filtrado por origen:
+          </span>
           <select onChange={filterByOrigin} name="origin">
             <option value="all">Todos los perros</option>
             <option value="api">Perros de la API</option>

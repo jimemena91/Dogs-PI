@@ -1,12 +1,17 @@
-/* styles.module.css */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
+/* Estilos para la sección de filtros y paginación */
 .filtersContainer {
-  position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Cambiado de column a row */
+  justify-content: space-between; /* Alinea los elementos horizontalmente */
   align-items: center;
-  margin-bottom: 10px; /* Ajustar el margen inferior según tus necesidades */
-  padding: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
   background: linear-gradient(to right, #283593, #1a237e);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -14,24 +19,22 @@
 
 .filtersSection,
 .paginationSection {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 300px; /* Ajustar el tamaño máximo del contenedor según tus necesidades */
-  margin-bottom: 10px; /* Ajustar el margen inferior según tus necesidades */
+  width: calc(50% - 10px); /* Dividir en dos columnas con un margen de 10px */
+  margin-bottom: 20px;
   color: white;
 }
 
 .filtersSection h4,
 .paginationSection h4 {
-  font-size: 16px; /* Ajustar el tamaño de la fuente según tus necesidades */
-  margin-bottom: 8px; /* Ajustar el margen inferior según tus necesidades */
+  font-size: 16px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
+/* Estilos para los elementos de filtro y paginación */
 .select {
-  padding: 6px; /* Ajustar el tamaño del padding para hacer los elementos más pequeños */
-  margin-right: 5px; /* Ajustar el margen derecho según tus necesidades */
+  padding: 8px;
+  margin-right: 5px;
   background-color: #3949ab;
   color: white;
   border: none;
@@ -44,7 +47,7 @@
 }
 
 .paginationButton {
-  padding: 6px 12px; /* Ajustar el tamaño del padding para hacer los botones más pequeños */
+  padding: 8px 16px;
   background-color: #3949ab;
   color: white;
   border: none;
@@ -55,4 +58,46 @@
 
 .paginationButton:hover {
   background-color: #303f9f;
+}
+
+/* Márgenes internos para los elementos de filtro y paginación */
+.filtersSection select,
+.paginationSection button {
+  margin-bottom: 10px;
+}
+
+/* Añadido: Estilo para Filtrado por Origen */
+.filtersSection select[name="origin"] {
+  margin-top: 10px;
+}
+
+/* Añadido: Estilo para Botón de Reset */
+.filtersSection button.resetButton {
+  padding: 10px 20px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.filtersSection button.resetButton:hover {
+  background-color: #b71c1c;
+}
+
+/* Añadido: Estilo para Temperamentos Seleccionados */
+.filtersSection button.selectedTemperament {
+  background-color: #558b2f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.filtersSection button.selectedTemperament:hover {
+  background-color: #33691e;
 }
