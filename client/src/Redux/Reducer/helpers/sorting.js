@@ -29,7 +29,7 @@ export const orderByWeight = (state, action) => {
         currentPage: newCurrentPage,
       };
     } catch (error) {
-      console.error('Error en orderByWeight:', error);
+     alert('Error en orderByWeight:', error);
       return state;
     }
   };

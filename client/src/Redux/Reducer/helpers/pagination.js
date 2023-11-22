@@ -13,7 +13,7 @@ export const paginateDogs = (state, action) => {
     } else if (action.payload === "prev" && state.currentPage > 0) {
       newCurrentPage = state.currentPage - 1;
     } else {
-      // No cambia de página si no hay "next" ni "prev"
+      
       newCurrentPage = state.currentPage;
     }
   

@@ -5,7 +5,7 @@ import {
   getDogs,
   getTemperaments,
   orderDogsAction,
-  paginateDogs,
+  paginateDogsAction,
   filterOriginAction,
 } from "../../Redux/Actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +27,7 @@ const Home = () => {
   }, []);
 
   const paginate = (event) => {
-    dispatch(paginateDogs(event.target.name, selectedTemperaments));
+    dispatch(paginateDogsAction(event.target.name, selectedTemperaments));
   };
 
   const filterDogs = (event) => {

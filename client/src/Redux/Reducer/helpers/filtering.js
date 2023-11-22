@@ -14,7 +14,7 @@ export const filterDogs = (state, action) => {
         );
       });
     } else {
-      // Sin temperamentos seleccionados, mostrar todos los resultados
+      
       filteredDogs = state.allDogsBackUp;
     }
   
@@ -45,7 +45,7 @@ export const filterDogs = (state, action) => {
   export const removeTemperament = (state, action) => {
     const updatedSelectedTemperament = action.payload.name;
   
-    // Filtra usando dogsFiltered en lugar de selectedTemperaments
+    
     const updatedFilteredDogs = state.dogsFiltered.filter(
       (dog) =>
         dog.temperaments &&

@@ -15,17 +15,27 @@
   display: flex;
   gap: 20px;
 }
-
 .NavBarLink {
   text-decoration: none;
-  color: #c7c7c7; /* Color de enlaces menos intenso */
+  color: blue; /* Color principal más vibrante */
   font-weight: bold;
-  font-size: 16px;
-  transition: color 0.3s; /* Agregada transición al cambiar el color al pasar el ratón */
+  font-size: 30px;
+  margin-left: 60px;
+  margin-right: 60px;
+  transition: color 0.3s, transform 0.3s, box-shadow 0.3s; /* Agregada transición para color, transformación y sombra */
+  
+
 }
 
 .NavBarLink:hover {
-  color: #fff; /* Cambio de color al pasar el ratón */
+  color: #1a73e8; /* Cambio de color al pasar el ratón */
+  transform: scale(1.5); /* Efecto de escala al pasar el ratón */
+  
+}
+
+.NavBarLink {
+  
+  cursor: pointer; /* Cambia el cursor al icono de la mano */
 }
 
 .NavBarImgCont img {

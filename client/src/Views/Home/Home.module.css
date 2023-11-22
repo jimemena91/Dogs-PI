@@ -89,7 +89,7 @@
 
 /* Añadido: Estilo para Temperamentos Seleccionados */
 .filtersSection button.selectedTemperament {
-  background-color: #558b2f;
+  background-color: cadetblue;
   color: white;
   border: none;
   border-radius: 4px;

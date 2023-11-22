@@ -51,7 +51,7 @@ export function getDogs() {
       dispatch({ type: GET_DOGS, payload: response.data });
       
       // Disparar la acción de paginación inicial
-      dispatch(paginateDogs("next"));
+      dispatch(paginateDogsAction("next"));
     } catch (error) {
       if (error.response && error.response.data) {
         alert(error.response.data.error);
@@ -61,7 +61,7 @@ export function getDogs() {
     }
   };
 }
-export function paginateDogs(order, category) {
+export function paginateDogsAction(order, category) {
   return async function (dispatch) {
     try {
       dispatch({ type: PAGINATE, payload: { order, category } });
@@ -79,22 +79,22 @@ export function filterDogsAction(temperaments) {
       });
     } catch (error) {
       alert("Hubo un error filtrando los perros.");
-      console.error(error);
-    }
+      
+        }
   };
   }
 
   export function filterOriginAction(origin) {
     return async function (dispatch) {
       try {
-        console.log('Filtrando por origen:', origin);
+        
         dispatch({
           type: FILTER_BY_ORIGIN,
           payload: origin,
         });
       } catch (error) {
         alert('Hubo un error filtrando los perros por origen.');
-        console.error(error);
+        
       }
     };
   }
@@ -127,7 +127,7 @@ export function getDog(id) {
 
       dispatch({ type: GET_DOG_DETAIL, payload: dogWithCreateInDb });
     } catch (error) {
-      console.log(error);
+      alert("Hubo un error al obtener el detalle del perro.");
     }
   };
 }
@@ -139,7 +139,7 @@ export function getNameDogs(name) {
       );
       dispatch({ type: GET_DOGS_NAME, payload: response.data });
     } catch (error) {
-      console.log(error);
+      alert("Hubo un error al obtener el nombre del perro.");
     }
   };
 }
