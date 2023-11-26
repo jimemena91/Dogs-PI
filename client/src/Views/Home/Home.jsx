@@ -83,7 +83,7 @@ const Home = () => {
       <div className={style.filtersContainer}>
         <div className={style.filtersBackground}></div>
         <div className={style.paginationSection}>
-          <h4>Paginado: </h4>
+          
          
           <button
             className={style.paginationButton}
@@ -117,7 +117,7 @@ const Home = () => {
           </button>
         </div>
         <div className={style.filtersSection}>
-          <h4>Filtros/Ordenamientos:</h4>
+          
           <span>Ordenamiento por nombre: </span>
           <select onClick={orderDogs} name="orderByName">
             <option value="AZ">A-Z</option>

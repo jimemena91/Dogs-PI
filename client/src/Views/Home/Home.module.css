@@ -3,82 +3,87 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
-  padding: 20px; /* Aumento del relleno para un aspecto más audaz */
-  background: #2c3e50; /* Azul oscuro para un fondo sólido */
-  border-radius: 20px; /* Bordes más redondeados */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px; /* Reduje el margen inferior */
+  padding: 10px; /* Reduje el relleno */
+  background: #2c3e50; /* Azul oscuro */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
 }
 
 .filtersSection,
 .paginationSection {
   width: 100%;
-  margin-bottom: 20px;
-  color: #ecf0f1; /* Texto claro para contraste */
-  background: #34495e; /* Azul oscuro para el fondo */
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px; /* Reduje el margen inferior */
+  color: #fff;
+  background: #34495e; /* Gris azulado oscuro */
+  padding: 15px; /* Ajusté el relleno */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Estilos para los elementos de filtro y paginación */
 .select,
 .paginationButton,
 .filtersSection button {
-  padding: 15px; /* Aumento del relleno para un aspecto más audaz */
+  padding: 10px 14px;
   border: none;
-  border-radius: 10px; /* Bordes más redondeados */
+  border-radius: 8px;
   cursor: pointer;
-  color: #ecf0f1;
+  color: #fff;
   transition: background-color 0.3s, transform 0.2s;
+  font-size: 14px;
+  font-weight: bold;
+  outline: none;
 }
 
 .select:hover,
 .paginationButton:hover,
 .filtersSection button:hover {
-  background-color: #2980b9; /* Azul brillante al hacer hover */
-  transform: scale(1.1);
+  background-color: #2ecc71; /* Verde intenso al hacer hover */
+  transform: scale(1.05);
 }
 
 /* Márgenes internos para los elementos de filtro y paginación */
 .filtersSection select,
 .paginationSection button,
 .filtersSection button {
-  margin-bottom: 15px; /* Aumento del margen para un aspecto más espaciado */
+  margin-bottom: 10px; /* Reduje el margen inferior */
 }
 
 /* Estilo para Filtrado por Origen */
 .filtersSection select[name="origin"] {
-  margin-top: 15px; /* Aumento del margen superior */
+  margin-top: 10px; /* Reduje el margen superior */
 }
 
 /* Estilo para Botón de Reset */
 .filtersSection button.resetButton {
-  padding: 12px 24px; /* Ajuste en el relleno */
-  background-color: #e74c3c; /* Rojo audaz */
-  color: #ecf0f1;
+  padding: 10px 20px;
+  background-color: #e74c3c; /* Rojo intenso */
+  color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.3s, transform 0.2s;
+  font-size: 14px;
+  outline: none;
 }
 
 .filtersSection button.resetButton:hover {
   background-color: #c0392b; /* Cambio de color al hacer hover */
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* Estilo para Temperamentos Seleccionados */
 .filtersSection button.selectedTemperament {
-  background-color: #27ae60; /* Verde audaz */
+  background-color: #f39c12; /* Amarillo intenso */
   margin-right: 8px;
   margin-bottom: 8px;
 }
 
 .filtersSection button.selectedTemperament:hover {
-  background-color: #219e54; /* Cambio de color al hacer hover */
-  transform: scale(1.1);
+  background-color: #d35400; /* Cambio de color al hacer hover */
+  transform: scale(1.05);
 }
 
 /* Estilos para la sección de paginación centrada */
@@ -90,9 +95,130 @@
 
 /* Estilos para los elementos de paginación */
 .paginationButton {
-  margin: 0 8px; /* Aumento del espacio entre los botones de paginación */
+  margin: 0 8px;
+  font-size: 14px;
+  background-color: #3498db; /* Azul brillante para los botones de paginación */
+  color: #fff;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
+.paginationButton:hover {
+  background-color: #2980b9; /* Cambio de color al hacer hover */
+  transform: scale(1.05);
+}
+/* Estilos para la sección de filtros y paginación */
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px; /* Reduje el margen inferior */
+  padding: 10px; /* Reduje el relleno */
+  background: #2c3e50; /* Azul oscuro */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.filtersSection,
+.paginationSection {
+  width: 100%;
+  margin-bottom: 10px; /* Reduje el margen inferior */
+  color: #fff;
+  background: #34495e; /* Gris azulado oscuro */
+  padding: 15px; /* Ajusté el relleno */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilos para los elementos de filtro y paginación */
+.select,
+.paginationButton,
+.filtersSection button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 14px;
+  font-weight: bold;
+  outline: none;
+}
+
+.select:hover,
+.paginationButton:hover,
+.filtersSection button:hover {
+  background-color: #2ecc71; /* Verde intenso al hacer hover */
+  transform: scale(1.05);
+}
+
+/* Márgenes internos para los elementos de filtro y paginación */
+.filtersSection select,
+.paginationSection button,
+.filtersSection button {
+  margin-bottom: 10px; /* Reduje el margen inferior */
+}
+
+/* Estilo para Filtrado por Origen */
+.filtersSection select[name="origin"] {
+  margin-top: 10px; /* Reduje el margen superior */
+}
+
+/* Estilo para Botón de Reset */
+.filtersSection button.resetButton {
+  padding: 10px 20px;
+  background-color: #e74c3c; /* Rojo intenso */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 14px;
+  outline: none;
+}
+
+.filtersSection button.resetButton:hover {
+  background-color: #c0392b; /* Cambio de color al hacer hover */
+  transform: scale(1.05);
+}
+
+/* Estilo para Temperamentos Seleccionados */
+.filtersSection button.selectedTemperament {
+  background-color: #f39c12; /* Amarillo intenso */
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.filtersSection button.selectedTemperament:hover {
+  background-color: #d35400; /* Cambio de color al hacer hover */
+  transform: scale(1.05);
+}
+
+/* Estilos para la sección de paginación centrada */
+.paginationSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos para los elementos de paginación */
+.paginationButton {
+  margin: 0 8px;
+  font-size: 14px;
+  background-color: #3498db; /* Azul brillante para los botones de paginación */
+  color: #fff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.paginationButton:hover {
+  background-color: #2980b9; /* Cambio de color al hacer hover */
+  transform: scale(1.05);
+}
+
+/* Márgenes internos para los elementos de paginación */
+.paginationSection button {
+  margin-bottom: 0;
+}
 /* Márgenes internos para los elementos de paginación */
 .paginationSection button {
   margin-bottom: 0;
