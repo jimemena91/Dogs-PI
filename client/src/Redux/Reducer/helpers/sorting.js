@@ -35,10 +35,14 @@ export const orderByWeight = (state, action) => {
   };
 
   export const orderByName = (state, action) => {
+  
+    
     const orderValue = action.payload === "AZ" ? 1 : -1;
     const orderByName = [...state.allDogsBackUp].sort((prev, next) => {
       return orderValue * prev.name.localeCompare(next.name);
     });
+  
+
   
     return {
       allDogs: [...orderByName].slice(0, ITEMS_PER_PAGE),

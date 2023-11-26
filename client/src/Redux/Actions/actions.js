@@ -51,7 +51,7 @@ export function getDogs() {
       dispatch({ type: GET_DOGS, payload: response.data });
       
       // Disparar la acción de paginación inicial
-      dispatch(paginateDogsAction("next"));
+      dispatch(paginateDogsAction(0));
     } catch (error) {
       if (error.response && error.response.data) {
         alert(error.response.data.error);
@@ -61,10 +61,10 @@ export function getDogs() {
     }
   };
 }
-export function paginateDogsAction(order, category) {
+export function paginateDogsAction(pageNumber) {
   return async function (dispatch) {
     try {
-      dispatch({ type: PAGINATE, payload: { order, category } });
+      dispatch({ type: PAGINATE, payload: pageNumber });
     } catch (error) {
       alert("Hubo un error paginando los perros.");
     }

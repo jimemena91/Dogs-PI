@@ -1,5 +1,5 @@
-
 const ITEMS_PER_PAGE=8
+
 export const updateDogsFromPayload = (state, action) => {
     const { payload } = action;
     const updatedDogs = payload.map((dog) => {

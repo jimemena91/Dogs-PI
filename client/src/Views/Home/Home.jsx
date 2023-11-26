@@ -26,21 +26,21 @@ const Home = () => {
     dispatch(getTemperaments());
   }, []);
 
-  const paginate = (event) => {
-    dispatch(paginateDogsAction(event.target.name, selectedTemperaments));
+  const paginate = (pageNumber) => {
+    dispatch(paginateDogsAction(pageNumber));
   };
 
   const filterDogs = (event) => {
     if (event.target.name === "temperaments") {
       const selectedTemperament = event.target.value;
-      const updatedTemperaments = [
-        ...selectedTemperaments,
-        selectedTemperament,
-      ];
+      const updatedTemperaments = [...selectedTemperaments, selectedTemperament];
       setSelectedTemperaments(updatedTemperaments);
       dispatch(filterDogsAction(updatedTemperaments));
+      // Desencadenar paginación al filtrar
+      paginate(0);
     }
   };
+  
   const removeSelectedTemperament = (temperamentToRemove) => {
     const updatedTemperaments = selectedTemperaments.filter(
       (temp) => temp !== temperamentToRemove
@@ -55,15 +55,20 @@ const Home = () => {
 
   const filterByOrigin = (event) => {
     const selectedOrigin = event.target.value;
+    console.log('Selected Origin:', selectedOrigin);
     dispatch(filterOriginAction(selectedOrigin));
+    // Desencadenar paginación al filtrar por origen
+    paginate(0);
   };
 
   const orderDogs = (event) => {
     const orderType = event.target.value;
     const orderCategory = event.target.name;
-
+  
     if (orderCategory === "orderByName" || orderCategory === "orderByWeight") {
       dispatch(orderDogsAction(orderType, orderCategory));
+      // Desencadenar paginación al ordenar
+      paginate(0);
     }
   };
 
@@ -99,15 +104,16 @@ const Home = () => {
               </option>
             ))}
           </select>
-         
           {selectedTemperaments.map((temp) => (
-            <button key={temp} onClick={() => removeSelectedTemperament(temp)} className={style.selectedTemperament}>
+            <button
+              key={temp}
+              onClick={() => removeSelectedTemperament(temp)}
+              className={style.selectedTemperament}
+            >
               X {temp}
             </button>
           ))}
-           <span>
-           Filtrado por origen:
-          </span>
+          <span>Filtrado por origen:</span>
           <select onChange={filterByOrigin} name="origin">
             <option value="all">Todos los perros</option>
             <option value="api">Perros de la API</option>
@@ -116,34 +122,49 @@ const Home = () => {
         </div>
         <div className={style.paginationSection}>
           <h4>Paginado: </h4>
-          <span>Página actual: {currentPage + 1}</span>
-          <span>Total de páginas: {totalPages}</span>
+         
+  
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (page) => (
+              <button
+                key={page}
+                onClick={() => paginate(page - 1)}
+                disabled={currentPage === page - 1}
+                className={
+                  currentPage === page - 1 ? style.activePage : ""
+                }
+              >
+                {page}
+              </button>
+            )
+          )}
+  
           <button
             className={style.paginationButton}
-            name="prev"
-            onClick={paginate}
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 0}
           >
             Prev
           </button>
           <button
             className={style.paginationButton}
-            name="next"
-            onClick={paginate}
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages - 1}
           >
             Next
           </button>
-          <button
-            onClick={(event) => {
-              handleClick(event);
-            }}
-          >
-            RESET DOGS
-          </button>
         </div>
+  
+        <button
+          onClick={(event) => {
+            handleClick(event);
+          }}
+        >
+          RESET DOGS
+        </button>
       </div>
       <CardsContainer allDogs={allDogs} />
     </div>
   );
-};
-
+        }
 export default Home;
