@@ -82,6 +82,40 @@ const Home = () => {
     <div className={style.homeContainer}>
       <div className={style.filtersContainer}>
         <div className={style.filtersBackground}></div>
+        <div className={style.paginationSection}>
+          <h4>Paginado: </h4>
+         
+          <button
+            className={style.paginationButton}
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 0}
+          >
+            Prev
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (page) => (
+              <button
+                key={page}
+                onClick={() => paginate(page - 1)}
+                disabled={currentPage === page - 1}
+                className={
+                  currentPage === page - 1 ? style.activePage : ""
+                }
+              >
+                {page}
+              </button>
+            )
+          )}
+  
+         
+          <button
+            className={style.paginationButton}
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages - 1}
+          >
+            Next
+          </button>
+        </div>
         <div className={style.filtersSection}>
           <h4>Filtros/Ordenamientos:</h4>
           <span>Ordenamiento por nombre: </span>
@@ -120,40 +154,7 @@ const Home = () => {
             <option value="db">Perros de la Base de Datos</option>
           </select>
         </div>
-        <div className={style.paginationSection}>
-          <h4>Paginado: </h4>
-         
-  
-          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
-            (page) => (
-              <button
-                key={page}
-                onClick={() => paginate(page - 1)}
-                disabled={currentPage === page - 1}
-                className={
-                  currentPage === page - 1 ? style.activePage : ""
-                }
-              >
-                {page}
-              </button>
-            )
-          )}
-  
-          <button
-            className={style.paginationButton}
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 0}
-          >
-            Prev
-          </button>
-          <button
-            className={style.paginationButton}
-            onClick={() => paginate(currentPage + 1)}
-            disabled={currentPage === totalPages - 1}
-          >
-            Next
-          </button>
-        </div>
+       
   
         <button
           onClick={(event) => {
