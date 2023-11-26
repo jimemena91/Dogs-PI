@@ -4,20 +4,20 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
-  padding: 15px; /* Se redujo el relleno */
-  background: #1a237e;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px; /* Aumento del relleno para un aspecto más audaz */
+  background: #2c3e50; /* Azul oscuro para un fondo sólido */
+  border-radius: 20px; /* Bordes más redondeados */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 .filtersSection,
 .paginationSection {
   width: 100%;
   margin-bottom: 20px;
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 15px; /* Se redujo el relleno */
-  border-radius: 8px;
+  color: #ecf0f1; /* Texto claro para contraste */
+  background: #34495e; /* Azul oscuro para el fondo */
+  padding: 20px;
+  border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -25,57 +25,60 @@
 .select,
 .paginationButton,
 .filtersSection button {
-  padding: 10px; /* Se redujo el relleno */
+  padding: 15px; /* Aumento del relleno para un aspecto más audaz */
   border: none;
-  border-radius: 4px;
+  border-radius: 10px; /* Bordes más redondeados */
   cursor: pointer;
-  color: white;
-  transition: background-color 0.3s;
+  color: #ecf0f1;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .select:hover,
 .paginationButton:hover,
 .filtersSection button:hover {
-  background-color: #303f9f;
+  background-color: #2980b9; /* Azul brillante al hacer hover */
+  transform: scale(1.1);
 }
 
 /* Márgenes internos para los elementos de filtro y paginación */
 .filtersSection select,
 .paginationSection button,
 .filtersSection button {
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Aumento del margen para un aspecto más espaciado */
 }
 
 /* Estilo para Filtrado por Origen */
 .filtersSection select[name="origin"] {
-  margin-top: 10px;
+  margin-top: 15px; /* Aumento del margen superior */
 }
 
 /* Estilo para Botón de Reset */
 .filtersSection button.resetButton {
-  padding: 8px 16px; /* Se redujo el relleno */
-  background-color: #d32f2f;
-  color: white;
+  padding: 12px 24px; /* Ajuste en el relleno */
+  background-color: #e74c3c; /* Rojo audaz */
+  color: #ecf0f1;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .filtersSection button.resetButton:hover {
-  background-color: #b71c1c;
+  background-color: #c0392b; /* Cambio de color al hacer hover */
+  transform: scale(1.1);
 }
 
 /* Estilo para Temperamentos Seleccionados */
 .filtersSection button.selectedTemperament {
-  background-color: cadetblue;
-  margin-right: 5px;
-  margin-bottom: 5px;
+  background-color: #27ae60; /* Verde audaz */
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .filtersSection button.selectedTemperament:hover {
-  background-color: slateblue;
+  background-color: #219e54; /* Cambio de color al hacer hover */
+  transform: scale(1.1);
 }
 
 /* Estilos para la sección de paginación centrada */
@@ -87,7 +90,7 @@
 
 /* Estilos para los elementos de paginación */
 .paginationButton {
-  margin: 0 5px;
+  margin: 0 8px; /* Aumento del espacio entre los botones de paginación */
 }
 
 /* Márgenes internos para los elementos de paginación */
