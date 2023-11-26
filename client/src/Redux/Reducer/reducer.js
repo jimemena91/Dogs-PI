@@ -27,6 +27,7 @@ let initialState = {
   filter: false,
   totalPages: 0,
 };
+const ITEMS_PER_PAGE = 8
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -47,11 +48,16 @@ function rootReducer(state = initialState, action) {
         ...dogsUpdateHelpers.updateDogsFromPayload(state, action),
       };
 
-    case GET_DOGS_NAME:
-      return {
-        ...state,
-        allDogs: action.payload,
-      };
+      case GET_DOGS_NAME:
+        const searchResults = action.payload;
+        return {
+          ...state,
+          currentPage: 0, // Reinicia la página al realizar una nueva búsqueda
+          totalPages: Math.ceil(searchResults.length / ITEMS_PER_PAGE),
+          allDogs: searchResults,
+          dogsFiltered: searchResults.slice(0, ITEMS_PER_PAGE), // Página inicial
+          filter: true,
+        };
     case PAGINATE:
       return {
         ...state,

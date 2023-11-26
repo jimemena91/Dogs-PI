@@ -138,6 +138,7 @@ export function getNameDogs(name) {
         `http://localhost:3001/dogs?name=${name}`
       );
       dispatch({ type: GET_DOGS_NAME, payload: response.data });
+      dispatch(paginateDogsAction(0));
     } catch (error) {
       alert("Hubo un error al obtener el nombre del perro.");
     }

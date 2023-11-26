@@ -36,12 +36,7 @@ export const filterDogs = (state, action) => {
         ? state.allDogsBackUp.filter((dog) => dog.createInDb)
         : state.allDogsBackUp;
   
-    console.log('Before Filter:', state);
-    console.log('After Filter:', {
-      allDogs: filteredByOrigin.slice(0, ITEMS_PER_PAGE),
-      dogsFiltered: filteredByOrigin,
-      currentPage: 0,
-    });
+    
   
     return {
       allDogs: filteredByOrigin.slice(0, ITEMS_PER_PAGE),
