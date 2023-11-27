@@ -1,36 +1,36 @@
-/* SearchBar.module.css */
-
 .searchContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border-radius: 12px;
-    border: 4px solid #1a237e; /* Bordes gruesos de color azul oscuro */
-    background-color: rgba(255, 255, 255, 0.5); /* Fondo transparente */
-    backdrop-filter: blur(8px); /* Efecto de desenfoque */
-  }
-  .searchTitle {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  .searchInput {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-right: 10px;
-  }
-  
-  .searchButton {
-    padding: 10px 20px;
-    background-color: #1a237e;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .searchButton:hover {
-    background-color: #152263;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  border: 4px solid #1a237e; /* Bordes gruesos de color azul oscuro */
+  background-color: rgba(255, 255, 255, 0.5); /* Fondo transparente */
+  backdrop-filter: blur(8px); /* Efecto de desenfoque */
+}
+
+.searchTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.searchInput {
+  padding: 12px; /* Aumenta el espacio interno para hacer el cuadro de entrada más grande */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px; /* Añade un margen inferior para separar el cuadro de entrada del botón */
+}
+
+.searchButton {
+  padding: 10px 20px;
+  background-color: #1a237e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.searchButton:hover {
+  background-color: #152263;
+}

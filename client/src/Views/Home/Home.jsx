@@ -157,6 +157,7 @@ const Home = () => {
        
   
         <button
+        className={style.resetButton}
           onClick={(event) => {
             handleClick(event);
           }}
