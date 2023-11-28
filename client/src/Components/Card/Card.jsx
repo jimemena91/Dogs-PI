@@ -14,8 +14,8 @@ const Card = ({ id, name, image, weight_min, weight_max, temperaments }) => {
         <div className={style.cardImgCont}>
           <img src={image} alt="image dog" />
         </div>
-        <h5>Weight_min: {weight_min} </h5>
-        <h5>Weight_max: {weight_max} </h5>
+        <h5>Weight min: {weight_min} </h5>
+        <h5>Weight max: {weight_max} </h5>
         
 
         <div>

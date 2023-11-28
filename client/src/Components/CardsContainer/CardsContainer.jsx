@@ -4,7 +4,8 @@ import style from "./CardsContainer.module.css";
 
 const CardsContainer = ({ allDogs }) => {
   
- 
+    console.log('Rendering CardsContainer with allDogs:', allDogs);
+
   return (
     <div className={style.cardsContainerCont}>
       {allDogs.map((dog) => (
