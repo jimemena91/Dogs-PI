@@ -6,13 +6,12 @@ import {
   getTemperaments,
   orderDogsAction,
   paginateDogsAction,
-  filterOriginAction,
+  filterOriginAction
 } from "../../Redux/Actions/actions";
 import { useDispatch, useSelector } from "react-redux";
-
 import style from "./Home.module.css";
 
-const Home = () => {
+export const Home = () => {
   const dispatch = useDispatch();
 
   const allDogs = useSelector((state) => state.allDogs);
@@ -33,58 +32,52 @@ const Home = () => {
   const filterDogs = (event) => {
     if (event.target.name === "temperaments") {
       const selectedTemperament = event.target.value;
-      const updatedTemperaments = [...selectedTemperaments, selectedTemperament];
+
+      const updatedTemperaments = [
+        ...selectedTemperaments,
+        selectedTemperament,
+      ];
       setSelectedTemperaments(updatedTemperaments);
       dispatch(filterDogsAction(updatedTemperaments));
-      // Desencadenar paginación al filtrar
       paginate(0);
     }
   };
-  
+
   const removeSelectedTemperament = (temperamentToRemove) => {
     const updatedTemperaments = selectedTemperaments.filter(
       (temp) => temp !== temperamentToRemove
     );
 
-    // Actualiza el estado local
     setSelectedTemperaments(updatedTemperaments);
-
-    // Actualiza el estado global
     dispatch(filterDogsAction(updatedTemperaments));
   };
 
   const filterByOrigin = (event) => {
     const selectedOrigin = event.target.value;
-    console.log('Selected Origin:', selectedOrigin);
     dispatch(filterOriginAction(selectedOrigin));
-    // Desencadenar paginación al filtrar por origen
     paginate(0);
   };
 
   const orderDogs = (event) => {
     const orderType = event.target.value;
     const orderCategory = event.target.name;
-  
+
     if (orderCategory === "orderByName" || orderCategory === "orderByWeight") {
       dispatch(orderDogsAction(orderType, orderCategory));
-      // Desencadenar paginación al ordenar
       paginate(0);
     }
   };
 
-  //boton de reset de personajes
   const handleClick = (event) => {
     event.preventDefault();
-    dispatch(getDogs()); // Restaura la lista de perros
-    dispatch(filterDogsAction([])); // Limpia los filtros
+    dispatch(getDogs());
+    dispatch(filterDogsAction([]));
   };
   return (
     <div className={style.homeContainer}>
       <div className={style.filtersContainer}>
         <div className={style.filtersBackground}></div>
         <div className={style.paginationSection}>
-          
-         
           <button
             className={style.paginationButton}
             onClick={() => paginate(currentPage - 1)}
@@ -98,16 +91,13 @@ const Home = () => {
                 key={page}
                 onClick={() => paginate(page - 1)}
                 disabled={currentPage === page - 1}
-                className={
-                  currentPage === page - 1 ? style.activePage : ""
-                }
+                className={currentPage === page - 1 ? style.activePage : ""}
               >
                 {page}
               </button>
             )
           )}
-  
-         
+
           <button
             className={style.paginationButton}
             onClick={() => paginate(currentPage + 1)}
@@ -117,7 +107,6 @@ const Home = () => {
           </button>
         </div>
         <div className={style.filtersSection}>
-          
           <span>Ordenamiento por nombre: </span>
           <select onClick={orderDogs} name="orderByName">
             <option value="AZ">A-Z</option>
@@ -154,10 +143,9 @@ const Home = () => {
             <option value="db">Perros de la Base de Datos</option>
           </select>
         </div>
-       
-  
+
         <button
-        className={style.resetButton}
+          className={style.resetButton}
           onClick={(event) => {
             handleClick(event);
           }}
@@ -168,5 +156,6 @@ const Home = () => {
       <CardsContainer allDogs={allDogs} />
     </div>
   );
-        }
-export default Home;
+};
+
+export default Home

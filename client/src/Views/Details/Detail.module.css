@@ -1,8 +1,9 @@
+/* Contenedor principal */
 .detailContainer {
   max-width: 600px;
   margin: 0 auto;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #2c3e50;
+  background-color: #34495e; /* Cambio de color a un tono más oscuro */
   border-radius: 20px;
   overflow: hidden;
   color: #ecf0f1;
@@ -10,26 +11,32 @@
   padding: 20px;
 }
 
+/* Título */
 .title {
-  font-size: 2.5em; /* Ajustado el tamaño del título */
+  font-size: 2.5em;
   margin-bottom: 15px;
   color: #e74c3c;
+  font-family: 'Georgia', serif; /* Cambio de la tipografía */
 }
 
+/* Contenedor de la imagen del perro */
 .dogImageContainer {
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
+/* Imagen del perro */
 .dogImage {
   width: 100%;
   max-width: 100%;
   height: auto;
   border-radius: 20px;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
 }
 
+/* Sección de detalles */
 .detailsSection {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -37,6 +44,7 @@
   text-align: center;
 }
 
+/* Etiqueta de detalles */
 .detailsLabel {
   font-weight: bold;
   font-size: 1.2em;
@@ -44,10 +52,12 @@
   color: #e74c3c;
 }
 
+/* Valor de detalles */
 .detailsValue {
   color: #f39c12;
 }
 
+/* Lista de temperamentos */
 .temperamentList {
   list-style-type: none;
   padding: 0;
@@ -57,6 +67,7 @@
   justify-content: center;
 }
 
+/* Elemento de temperamento */
 .temperamentItem {
   margin: 0 8px 8px 0;
   background-color: #3498db;
@@ -64,4 +75,11 @@
   border-radius: 10px;
   color: #ecf0f1;
   font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+/* Efecto de hover para el elemento de temperamento */
+.temperamentItem:hover {
+  background-color: #2980b9;
 }

@@ -1,8 +1,14 @@
-.cardsContainerCont{
+.cardsContainerCont {
     display: flex;
-    justify-content: center ;
+    justify-content: center;
     align-items: center;
-    height: 80vh;
-    width:100%;
+    width: 100%;
     flex-wrap: wrap;
+    background-image: url("https://i.pinimg.com/564x/62/11/c1/6211c12413aee25290f28c224a7cab45.jpg");
+    background-color: rgba(255, 255, 255, 0.3); /* Color de fondo con opacidad reducida */
+    background-blend-mode: lighten;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
 }

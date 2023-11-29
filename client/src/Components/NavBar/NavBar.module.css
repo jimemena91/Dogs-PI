@@ -24,6 +24,7 @@
   font-size: 30px;
   margin-left: 60px;
   margin-right: 60px;
+  margin-top: 190px;
   transition: color 0.3s, transform 0.3s, box-shadow 0.3s; /* Agregada transición para color, transformación y sombra */
  
 }

@@ -1,4 +1,4 @@
-const ITEMS_PER_PAGE = 8
+const ITEMS_PER_PAGE = 8;
 
 export const paginateDogs = (state, action) => {
   const totalDogs = state.filter
@@ -12,11 +12,11 @@ export const paginateDogs = (state, action) => {
   } else if (action.payload === "prev" && state.currentPage > 0) {
     newCurrentPage = state.currentPage - 1;
   } else {
-    // Si action.payload es un número, establecer la página directamente
     newCurrentPage = action.payload;
   }
 
   const firstIndexPaginate = newCurrentPage * ITEMS_PER_PAGE;
+
   const lastIndexPaginate = Math.min(
     firstIndexPaginate + ITEMS_PER_PAGE,
     totalDogs
@@ -29,8 +29,9 @@ export const paginateDogs = (state, action) => {
   const newState = {
     currentPage: newCurrentPage,
     totalPages: Math.ceil(totalDogs / ITEMS_PER_PAGE),
-    allDogs: paginatedDogs, // Actualizar la lista de perros paginados
+    allDogs: paginatedDogs,
   };
 
+ 
   return newState;
 };

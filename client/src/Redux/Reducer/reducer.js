@@ -10,6 +10,7 @@ import {
   PAGINATE,
   REMOVE_TEMPERAMENT,
 } from "../Actions/actions-types";
+
 import * as paginationHelpers from "./helpers/pagination";
 import * as filteringHelpers from "./helpers/filtering";
 import * as sortingHelpers from "./helpers/sorting";
@@ -18,7 +19,6 @@ import * as dogsUpdateHelpers from "./helpers/dogsUpdate";
 let initialState = {
   allDogs: [],
   allTemperaments: [],
-
   allDogsBackUp: [],
   dogDetail: {},
   currentPage: 0,
@@ -27,7 +27,8 @@ let initialState = {
   filter: false,
   totalPages: 0,
 };
-const ITEMS_PER_PAGE = 8
+
+const ITEMS_PER_PAGE = 8;
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -36,6 +37,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         dogDetail: action.payload,
       };
+
     case GET_TEMPERAMENTS:
       return {
         ...state,
@@ -48,31 +50,35 @@ function rootReducer(state = initialState, action) {
         ...dogsUpdateHelpers.updateDogsFromPayload(state, action),
       };
 
-      case GET_DOGS_NAME:
-        const searchResults = action.payload;
-        return {
-          ...state,
-          currentPage: 0, // Reinicia la página al realizar una nueva búsqueda
-          totalPages: Math.ceil(searchResults.length / ITEMS_PER_PAGE),
-          allDogs: searchResults,
-          dogsFiltered: searchResults.slice(0, ITEMS_PER_PAGE), // Página inicial
-          filter: true,
-        };
+    case GET_DOGS_NAME:
+      const searchResults = action.payload;
+      return {
+        ...state,
+        currentPage: 0,
+        totalPages: Math.ceil(searchResults.length / ITEMS_PER_PAGE),
+        allDogs: searchResults,
+        dogsFiltered: searchResults.slice(0, ITEMS_PER_PAGE),
+        filter: true,
+      };
+
     case PAGINATE:
       return {
         ...state,
         ...paginationHelpers.paginateDogs(state, action),
       };
+
     case FILTER:
       return {
         ...state,
         ...filteringHelpers.filterDogs(state, action),
       };
+
     case FILTER_BY_ORIGIN:
       return {
         ...state,
         ...filteringHelpers.filterByOrigin(state, action),
       };
+
     case ORDER:
       return {
         ...state,
@@ -93,8 +99,7 @@ function rootReducer(state = initialState, action) {
 
     default:
       return state;
-      break;
   }
 }
 
-export default rootReducer
+export default rootReducer;

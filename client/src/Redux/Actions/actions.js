@@ -18,7 +18,9 @@ import {
 export function getTemperaments() {
   return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/dogs/temperaments/");
+      const response = await axios.get(
+        "http://localhost:3001/dogs/temperaments/"
+      );
       dispatch({ type: GET_TEMPERAMENTS, payload: response.data });
     } catch (error) {
       dispatch({ type: GET_TEMPERAMENTS_FAILURE, payload: error.message });
@@ -28,7 +30,7 @@ export function getTemperaments() {
 export const removeTemperament = (temperamentToRemove) => {
   return {
     type: REMOVE_TEMPERAMENT,
-    payload: { name: temperamentToRemove }, // Wrap the payload in an object with "name" property
+    payload: { name: temperamentToRemove },
   };
 };
 
@@ -44,13 +46,14 @@ export function postDog(state) {
     }
   };
 }
+
 export function getDogs() {
   return async function (dispatch) {
     try {
       const response = await axios.get("http://localhost:3001/dogs/");
+
       dispatch({ type: GET_DOGS, payload: response.data });
-      
-      // Disparar la acción de paginación inicial
+
       dispatch(paginateDogsAction(0));
     } catch (error) {
       if (error.response && error.response.data) {
@@ -61,6 +64,7 @@ export function getDogs() {
     }
   };
 }
+
 export function paginateDogsAction(pageNumber) {
   return async function (dispatch) {
     try {
@@ -70,34 +74,32 @@ export function paginateDogsAction(pageNumber) {
     }
   };
 }
+
 export function filterDogsAction(temperaments) {
   return async function (dispatch) {
     try {
       dispatch({
         type: FILTER,
-        payload: Array.isArray(temperaments) ? temperaments : [temperaments], // Asegúrate de que el payload sea siempre un array
+        payload: Array.isArray(temperaments) ? temperaments : [temperaments],
       });
     } catch (error) {
       alert("Hubo un error filtrando los perros.");
-      
-        }
+    }
   };
-  }
+}
 
-  export function filterOriginAction(origin) {
-    return async function (dispatch) {
-      try {
-        
-        dispatch({
-          type: FILTER_BY_ORIGIN,
-          payload: origin,
-        });
-      } catch (error) {
-        alert('Hubo un error filtrando los perros por origen.');
-        
-      }
-    };
-  }
+export function filterOriginAction(origin) {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: FILTER_BY_ORIGIN,
+        payload: origin,
+      });
+    } catch (error) {
+      alert("Hubo un error filtrando los perros por origen.");
+    }
+  };
+}
 
 export const orderDogsAction = (orderType, orderCategory) => {
   return async function (dispatch) {
@@ -119,7 +121,6 @@ export function getDog(id) {
       const response = await axios.get(`http://localhost:3001/dogs/${id}`);
       const isFromApi = !isNaN(Number(response.data.id));
 
-      // Ajusta la propiedad createInDb según la procedencia del perro
       const dogWithCreateInDb = {
         ...response.data,
         createInDb: !isFromApi,

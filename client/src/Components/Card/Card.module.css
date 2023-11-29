@@ -9,37 +9,38 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #aed9e0; /* Color de fondo para la "tarjeta" detrás */
+  background-color: #4d8cbf; /* Nuevo color de fondo para la "tarjeta" detrás */
   z-index: 0;
   border-radius: 10px; /* Bordes redondeados */
 }
 
 .cardCont {
   position: relative;
-  border: 1px solid #ddd;
+  border: 2px solid #1d3b5b;
   padding: 20px;
   margin: 10px;
   width: 250px;
   text-align: center;
-  background-color: #00204a; /* Fondo de la "tarjeta" principal */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #132c4e; /* Nuevo fondo de la "tarjeta" principal */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s, box-shadow 0.3s;
-  border-radius: 10px;
+  border-radius: 15px;
   z-index: 1;
 }
 
 .cardContTitle {
+  font-family: 'Verdana', sans-serif; /* Cambio de la tipografía */
   background-color: #fdb44b;
-  color: #fff;
-  padding: 10px;
+  color: #ffffff;
+  padding: 15px;
   font-weight: bold;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .cardCont:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
 }
 
 .cardContInfo {
@@ -48,34 +49,33 @@
 }
 
 .cardContInfo h5 {
-  font-size: 18px; /* Aumentado el tamaño del título */
-  margin: 10px 0;
-  color: #fdb44b; /* Cambiado el color del texto a un tono más llamativo */
-  
-  letter-spacing: 1px; /* Añadir un ligero espaciado entre las letras */
-  font-family: 'Roboto', sans-serif; /* Puedes cambiar la fuente según tus preferencias */
+  font-size: 20px;
+  margin: 15px 0;
+  color: #fdb44b;
+  letter-spacing: 2px;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
 }
 
 .cardContInfo ul {
   text-align: left;
   padding-left: 0;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .cardContInfo ul li {
   list-style: none;
-  margin: 8px 0;
-  color: #fff; /* Color del texto en la "tarjeta" principal */
+  margin: 10px 0;
+  color: #fff;
 }
 
 /* Estilos para los temperamentos */
 .cardContInfo ul li {
   display: inline-block;
-  background-color: #ffcc80;
-  padding: 8px 12px;
-  margin: 8px;
-  border-radius: 15px;
+  background-color: #ffaa80;
+  padding: 12px 18px;
+  margin: 12px;
+  border-radius: 20px;
   color: #333;
   font-weight: bold;
 }
@@ -86,13 +86,13 @@
   align-items: center;
   height: 200px;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 .cardImgCont img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
